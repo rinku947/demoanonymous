@@ -1,7 +1,7 @@
 var express=require('express');
 var app=express();
-var https=require('https').Server(app);
-var io = require('socket.io')(https);
+var http=require('http').Server(app);
+var io = require('socket.io')(http);
 var ip = require('ip');
 const PORT=process.env.PORT || 5200;
 app.use(express.static(__dirname));
@@ -19,9 +19,9 @@ var crypto=require('crypto');
 
 const forceSSL = function () {
     return function (req, res, next) {
-        if (req.headers['x-forwarded-proto'] !== 'https') {
+        if (req.headers['x-forwarded-proto'] !== 'http') {
             return res.redirect(
-                ['https://', req.get('Host'), req.url].join('')
+                ['http://', req.get('Host'), req.url].join('')
             );
         }
         next();
@@ -35,6 +35,6 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 
 
-https.listen(PORT,function(){
-    console.log("Node Server is setup and it is listening on https://"+ip.address()+":"+PORT);
+http.listen(PORT,function(){
+    console.log("Node Server is setup and it is listening on http://"+ip.address()+":"+PORT);
 })

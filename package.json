@@ -6,17 +6,16 @@
   "scripts": {
     "start": "nodemon server.js"
   },
-  
   "license": "MIT",
-"engines": {
-  "node": "9.2.1"
-},
+  "engines": {
+    "node": "9.2.1"
+  },
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "express-validator": "^5.2.0",
     "helmet": "^3.12.1",
-    "https": "^1.0.0",
+    "http": "0.0.0",
     "ip": "^1.1.5",
     "mongoose": "^4.6.1",
     "nodemon": "^1.11.0",

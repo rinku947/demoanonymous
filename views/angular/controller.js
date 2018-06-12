@@ -54,7 +54,7 @@ app.directive('myEnter', function () {
 });
 
 
-app.controller('myController',['$scope','socket','https','$mdDialog','$compile','$location','$state','$localStorage', '$sessionStorage',function($scope,socket,https,$mdDialog,$compile,$location,$state,$localStorage, $sessionStorage){
+app.controller('myController',['$scope','socket','http','$mdDialog','$compile','$location','$state','$localStorage', '$sessionStorage',function($scope,socket,http,$mdDialog,$compile,$location,$state,$localStorage, $sessionStorage){
     url= location.host;
     $scope.users=[];
     $scope.online_friends=[];
@@ -118,7 +118,7 @@ app.controller('myController',['$scope','socket','https','$mdDialog','$compile',
 //            }
 //        };
 
-        https({method: 'POST',url:'https://'+url+'/friend_request',data})//, headers:config})
+        http({method: 'POST',url:'http://'+url+'/friend_request',data})//, headers:config})
             .success(function (data) {
             console.log(data)
         })
@@ -139,14 +139,14 @@ app.controller('myController',['$scope','socket','https','$mdDialog','$compile',
 
         $mdDialog.show(confirm).then(function() {
             data['confirm']="Yes";
-            https({method: 'POST',url:'https://'+url+'/friend_request/confirmed', data//, headers:{
+            http({method: 'POST',url:'http://'+url+'/friend_request/confirmed', data//, headers:{
                 //'Content-Type': 'application/json'
             //}
             })
         }, function() {
             data['confirm']="No";
 
-            https({method: 'POST',url:'https://'+url+'/friend_request/confirmed', data//, headers:{
+            http({method: 'POST',url:'http://'+url+'/friend_request/confirmed', data//, headers:{
             //    'Content-Type': 'application/json'
             //}
             })
@@ -436,7 +436,7 @@ app.service('encrypt', function() {
     }
 });
 
-app.controller('registerController',['$scope','encrypt','https','$state',function($scope,encrypt,https,$state){
+app.controller('registerController',['$scope','encrypt','http','$state',function($scope,encrypt,http,$state){
     url= location.host;
 
     $scope.user={
@@ -455,7 +455,7 @@ app.controller('registerController',['$scope','encrypt','https','$state',functio
     $scope.Register = function(){
         $scope.user.password=encrypt.hash($scope.user.password);
 
-        https({method: 'POST',url:'https://'+url+'/register', data:$scope.user})//, headers:config})
+        http({method: 'POST',url:'http://'+url+'/register', data:$scope.user})//, headers:config})
             .success(function (data) {
             console.log(data)
         })
@@ -469,7 +469,7 @@ app.controller('registerController',['$scope','encrypt','https','$state',functio
         console.log("login");
         $scope.login_data.password=encrypt.hash($scope.login_data.password);
         console.log($scope.login_data);
-        https({ method: 'POST', url:'https://'+url+'/login', data:$scope.login_data })//, headers:config})
+        http({ method: 'POST', url:'http://'+url+'/login', data:$scope.login_data })//, headers:config})
             .success(function (data) {
             if(data=="success"){
                 console.log("Inside success login");
