@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 mongoose.Promise=global.Promise;
-mongoose.connect("mongodb://demopurpose:demopurpose1@ds155730.mlab.com:55730/demowebwing", {
+mongoose.connect("mongodb://suraj:suraj1@ds155730.mlab.com:55730/demowebwing", {
     useMongoClient: true
 }).then(function(dbcon){
     console.log("DB connected to MLAB server");
@@ -31,16 +31,7 @@ module.exports.messages=mongoose.model('message',new Schema({
     reciever: String,
     date    : Date
 }));
-module.exports.api_register=mongoose.model('api_register',new Schema({
-    name:String,
-    comapny_name:String,
-    comapny_email:{type:String,unique:true},
-    password:String,
-    register_date:String,
-    UUId_key:String,
-    API_key:String
 
-}));
 
 
 
